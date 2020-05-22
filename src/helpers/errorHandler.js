@@ -3,12 +3,9 @@
  * @description Central HTTP error handler
  */
 class HttpError {
-  static sendErrorResponse({ statusCode, message }, res) {
-    const code = statusCode || 500;
-
-    return res.status(code).json({
-      success: false,
-      message,
+  static sendErrorResponse({ statusCode, error }, res) {
+    return res.status(statusCode).json({
+      error,
     });
   }
 }

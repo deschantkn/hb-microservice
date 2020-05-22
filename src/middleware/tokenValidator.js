@@ -16,18 +16,18 @@ class TokenValidator {
 
     if (token) {
       try {
-        const decoded = JWTHelper.verifyToken(token);
-        next();
+        JWTHelper.verifyToken(token);
+        return next();
       } catch (error) {
         return HttpError.sendErrorResponse(
-          { statusCode: 401, message: 'Token is invalid' },
+          { statusCode: 401, error: 'Token is invalid' },
           res,
         );
       }
     }
 
     return HttpError.sendErrorResponse(
-      { statusCode: 401, message: 'Token is missing' },
+      { statusCode: 401, error: 'Token is missing' },
       res,
     );
   }

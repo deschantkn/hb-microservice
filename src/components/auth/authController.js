@@ -20,7 +20,7 @@ class AuthContoller {
     }
 
     return HttpError.sendErrorResponse(
-      { statusCode: 400, message: 'username and password reqired' },
+      { statusCode: 400, error: 'username and password reqired' },
       res,
     );
   }
