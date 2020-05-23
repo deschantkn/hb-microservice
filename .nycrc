@@ -1,0 +1,4 @@
+{
+  "all": true,
+  "extends": "@istanbuljs/nyc-config-babel"
+}

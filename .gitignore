@@ -1,7 +1,11 @@
-node_modules
 .vscode
+
+node_modules
 dist/
 .env
 
 logs/*
 !logs/.gitkeep
+
+.nyc_output
+coverage
