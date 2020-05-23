@@ -1,5 +1,5 @@
 {
-  "watch": ["src"],
+  "watch": ["src", "swagger.json"],
   "ext": "js",
   "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"],
   "exec": "babel-node src/bin/www"

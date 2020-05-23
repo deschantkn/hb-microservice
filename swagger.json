@@ -1,0 +1,158 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2",
+    "title": "HB Nodejs Microservice",
+    "description": "Dockerized Nodejs Microservice"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "User authentication"
+    },
+    {
+      "name": "JSON Patch",
+      "description": "JSON Patching"
+    },
+    {
+      "name": "Generate Thumbnail",
+      "description": "Generate image thumbnail"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json", "image/jpeg"],
+  "securityDefinitions": {
+    "APIKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "definitions": {
+    "login": {
+      "type": "object",
+      "required": ["username", "password"],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "joseph"
+        },
+        "password": {
+          "type": "string",
+          "example": "DlEZPAL7X9$vY1"
+        }
+      }
+    },
+    "jsonPatch": {
+      "type": "object",
+      "required": ["json", "patch"],
+      "properties": {
+        "json": {
+          "type": "object",
+          "example": {
+            "baz": "qux",
+            "foo": "bar"
+          }
+        },
+        "patch": {
+          "type": "array",
+          "example": [
+            { "op": "replace", "path": "/baz", "value": "boo" },
+            { "op": "add", "path": "/hello", "value": ["world"] },
+            { "op": "remove", "path": "/foo" }
+          ]
+        }
+      }
+    },
+    "thumbnail": {
+      "type": "object",
+      "required": ["imgUrl"],
+      "properties": {
+        "imgUrl": {
+          "type": "string",
+          "example": "https://images.pexels.com/photos/318391/pexels-photo-318391.jpeg"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Obtain JWT token with with arbitraty credentials",
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        }
+      }
+    },
+    "/json/patch": {
+      "patch": {
+        "tags": ["JSON Patch"],
+        "parameters": [
+          {
+            "name": "json patch",
+            "in": "body",
+            "description": "Apply json patch operation",
+            "schema": {
+              "$ref": "#/definitions/jsonPatch"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "security": {
+          "APIKeyHeader": ["Authorization"]
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/jsonPatch"
+            }
+          }
+        }
+      }
+    },
+    "/thumbnail/generate": {
+      "post": {
+        "tags": ["Generate Thumbnail"],
+        "parameters": [
+          {
+            "name": "thumbnail",
+            "in": "body",
+            "description": "Generate image thumbnail",
+            "schema": {
+              "$ref": "#/definitions/thumbnail"
+            }
+          }
+        ],
+        "produces": ["image/jpeg"],
+        "security": {
+          "APIKeyHeader": []
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/thumbnail"
+            }
+          }
+        }
+      }
+    }
+  }
+}
