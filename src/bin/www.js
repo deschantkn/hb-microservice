@@ -3,12 +3,10 @@
 /**
  * Module dependencies.
  */
-
-import debugLib from 'debug';
 import http from 'http';
-import app from '../app';
 
-const debug = debugLib('hb-microservice:server');
+import app from '../app';
+import winston from '../config/winston';
 
 /**
  * Normalize a port into a number, string, or false.
@@ -72,12 +70,12 @@ function onError(error) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  winston.info(`Server listening on port ${bind}`);
 }
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`Server listening on port ${port}`));
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

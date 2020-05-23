@@ -17,6 +17,7 @@ class ThumbnailController {
     if (!imgUrl) {
       return HttpError.sendErrorResponse(
         { statusCode: 400, error: 'Image url empty' },
+        req,
         res,
       );
     }
@@ -32,9 +33,10 @@ class ThumbnailController {
       return originalImage
         .resize(50, 50)
         .write(thumbnailPath, () => res.status(200).sendFile(thumbnailPath));
-    } catch (error) {
+    } catch (e) {
       return HttpError.sendErrorResponse(
-        { statusCode: 400, error: 'Invalid image url' },
+        { statusCode: 400, error: e.message },
+        req,
         res,
       );
     }

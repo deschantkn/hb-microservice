@@ -14,15 +14,16 @@ class AuthContoller {
   static login(req, res) {
     const { username, password } = req.body;
 
-    if (username && password) {
-      const token = JWTHelper.signToken(username);
-      return res.status(200).json({ data: { token } });
+    if (!username && !password) {
+      return HttpError.sendErrorResponse(
+        { statusCode: 400, error: 'username and password reqired' },
+        req,
+        res,
+      );
     }
 
-    return HttpError.sendErrorResponse(
-      { statusCode: 400, error: 'username and password reqired' },
-      res,
-    );
+    const token = JWTHelper.signToken(username);
+    return res.status(200).json({ data: { token } });
   }
 }
 

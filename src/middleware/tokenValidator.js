@@ -21,6 +21,7 @@ class TokenValidator {
       } catch (error) {
         return HttpError.sendErrorResponse(
           { statusCode: 401, error: 'Token is invalid' },
+          req,
           res,
         );
       }
@@ -28,6 +29,7 @@ class TokenValidator {
 
     return HttpError.sendErrorResponse(
       { statusCode: 401, error: 'Token is missing' },
+      req,
       res,
     );
   }

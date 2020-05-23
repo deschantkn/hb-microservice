@@ -16,27 +16,31 @@ class JSONPatchController {
     const { json, patch } = req.body;
 
     if (!json || !patch) {
-      return HttpError.sendErrorResponse({
-        statusCode: 400,
-        message: 'JSON object or JSON Patch object missing',
+      return HttpError.sendErrorResponse(
+        {
+          statusCode: 400,
+          message: 'JSON object or JSON Patch object missing',
+        },
+        req,
         res,
-      });
+      );
     }
 
     const validationErrors = jsonPatch.validate(patch, json);
 
-    if (!validationErrors) {
-      const patchedObject = jsonPatch.applyPatch(json, patch).newDocument;
-      return res.status(200).json({ data: patchedObject });
+    if (validationErrors) {
+      return HttpError.sendErrorResponse(
+        {
+          statusCode: 400,
+          error: validationErrors,
+        },
+        req,
+        res,
+      );
     }
 
-    return HttpError.sendErrorResponse(
-      {
-        statusCode: 400,
-        error: validationErrors,
-      },
-      res,
-    );
+    const patchedObject = jsonPatch.applyPatch(json, patch).newDocument;
+    return res.status(200).json({ data: patchedObject });
   }
 }
 
