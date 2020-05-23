@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.nyc_output
+coverage
+dist
+logs
+.vscode

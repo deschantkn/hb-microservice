@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./dist/bin/www",
+    "start": "NODE_ENV=production node ./dist/bin/www",
     "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha './src/**/__tests__/**/*.spec.js' --require @babel/register",
-    "dev": "nodemon",
+    "dev": "NODE_ENV=development nodemon",
     "clean": "rimraf dist",
     "transpile": "babel ./src --out-dir dist",
     "build": "npm-run-all clean transpile",
