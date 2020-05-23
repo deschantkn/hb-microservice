@@ -6,11 +6,13 @@ import jwt from 'jsonwebtoken';
  */
 class JWTHelper {
   /**
-   * @param {String} username Arbitrary username
+   * @param {String} payload Arbitrary payload
    * @returns {String} signed JSON Web Token
    */
-  static signToken(username) {
-    return jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  static signToken(payload) {
+    return jwt.sign({ data: payload }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
   }
 
   /**

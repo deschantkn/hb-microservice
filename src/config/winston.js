@@ -13,11 +13,13 @@ const options = {
     colorize: false,
   },
   console: {
+    name: 'console.info',
     level: 'debug',
     handleExceptions: true,
     json: false,
     colorize: true,
     format: winston.format.simple(),
+    silent: process.env.NODE_ENV === 'test',
   },
 };
 

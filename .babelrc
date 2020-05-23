@@ -1,5 +1,12 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": ["istanbul"],
-  "ignore": ["**/*.spec.js"]
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
+    "istanbul"
+  ]
 }

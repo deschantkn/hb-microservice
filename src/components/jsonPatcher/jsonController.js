@@ -14,18 +14,6 @@ class JSONPatchController {
    */
   static applyPatch(req, res) {
     const { json, patch } = req.body;
-
-    if (!json || !patch) {
-      return HttpError.sendErrorResponse(
-        {
-          statusCode: 400,
-          message: 'JSON object or JSON Patch object missing',
-        },
-        req,
-        res,
-      );
-    }
-
     const validationErrors = jsonPatch.validate(patch, json);
 
     if (validationErrors) {
