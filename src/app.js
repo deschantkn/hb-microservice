@@ -6,6 +6,7 @@ import TokenValidator from './middleware/TokenValidator';
 import HttpError from './helpers/errorHandler';
 import { authApi } from './components/auth';
 import { jsonApi } from './components/jsonPatcher';
+import { thumbnailApi } from './components/thumbnail';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', authApi);
 app.use('/api/json', TokenValidator.withToken, jsonApi);
+app.use('/api/thumbnail', TokenValidator.withToken, thumbnailApi);
 
 // Catch all unhandled routes
 app.use('*', (_, res) => {

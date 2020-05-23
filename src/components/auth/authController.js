@@ -11,7 +11,7 @@ class AuthContoller {
    * @param {Object} res Response object
    * @returns {Object} Responds with JWT auth token
    */
-  static async login(req, res) {
+  static login(req, res) {
     const { username, password } = req.body;
 
     if (username && password) {

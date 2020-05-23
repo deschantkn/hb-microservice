@@ -12,7 +12,7 @@ class JSONPatchController {
    * @param {Object} res Response object
    * @returns {Object} Responds with patched JSON object
    */
-  static async applyPatch(req, res) {
+  static applyPatch(req, res) {
     const { json, patch } = req.body;
 
     if (!json || !patch) {
