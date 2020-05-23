@@ -4,6 +4,6 @@ import ThumbnailController from './thumbnailController';
 
 const router = Router();
 
-router.get('/', ThumbnailController.generateThumbnail);
+router.post('/generate', ThumbnailController.generateThumbnail);
 
 export default router;

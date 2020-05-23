@@ -1,5 +1,4 @@
 import JWTHelper from '../../helpers/jwtHelper';
-import HttpError from '../../helpers/errorHandler';
 
 /**
  * @class AuthController
@@ -12,17 +11,9 @@ class AuthContoller {
    * @returns {Object} Responds with JWT auth token
    */
   static login(req, res) {
-    const { username, password } = req.body;
-
-    if (!username && !password) {
-      return HttpError.sendErrorResponse(
-        { statusCode: 400, error: 'username and password reqired' },
-        req,
-        res,
-      );
-    }
-
+    const { username } = req.body;
     const token = JWTHelper.signToken(username);
+
     return res.status(200).json({ data: { token } });
   }
 }

@@ -13,14 +13,7 @@ class ThumbnailController {
    * @returns {Object} Responds with patched JSON object
    */
   static async generateThumbnail(req, res) {
-    const { imgUrl } = req.query;
-    if (!imgUrl) {
-      return HttpError.sendErrorResponse(
-        { statusCode: 400, error: 'Image url empty' },
-        req,
-        res,
-      );
-    }
+    const { imgUrl } = req.body;
 
     try {
       const originalImage = await Jimp.read(imgUrl);
@@ -35,7 +28,7 @@ class ThumbnailController {
         .write(thumbnailPath, () => res.status(200).sendFile(thumbnailPath));
     } catch (e) {
       return HttpError.sendErrorResponse(
-        { statusCode: 400, error: e.message },
+        { statusCode: 400, error: e },
         req,
         res,
       );

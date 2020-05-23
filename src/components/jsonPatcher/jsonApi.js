@@ -3,6 +3,6 @@ import JSONPatchController from './jsonController';
 
 const router = Router();
 
-router.patch('/', JSONPatchController.applyPatch);
+router.patch('/patch', JSONPatchController.applyPatch);
 
 export default router;

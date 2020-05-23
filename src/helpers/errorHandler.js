@@ -10,9 +10,7 @@ class HttpError {
     winston.error(
       `${code} - ${error} - ${req.originalUrl} - ${req.method} - ${req.ip}`,
     );
-    return res.status(code).json({
-      error,
-    });
+    return res.status(code).json({ sucess: false, error });
   }
 }
 
