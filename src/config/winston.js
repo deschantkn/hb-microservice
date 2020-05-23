@@ -36,7 +36,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // create a stream object with a 'write' function that will be used by `morgan`
 logger.stream = {
-  write: (message, encoding) => {
+  write: (message) => {
     logger.info(message);
   },
 };
