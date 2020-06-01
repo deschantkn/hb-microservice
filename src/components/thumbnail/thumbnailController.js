@@ -17,15 +17,13 @@ class ThumbnailController {
 
     try {
       const originalImage = await Jimp.read(imgUrl);
-      const thumbnailPath = path.join(
-        __dirname,
-        'images',
-        `${new Date().toISOString()}.jpg`,
-      );
 
       return originalImage
         .resize(50, 50)
-        .write(thumbnailPath, () => res.status(200).sendFile(thumbnailPath));
+        .getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
+          res.set('Content-Type', Jimp.MIME_JPEG);
+          res.send(buffer);
+        });
     } catch (e) {
       return HttpError.sendErrorResponse(
         { statusCode: 400, error: e },

@@ -17,7 +17,9 @@ The **JSON Patching** and **Image Thumbnail** APIs are protected with JWT. Find 
 3. Run `npm install` from project root
 4. Start the server with `npm start`
 
-#### Run with docker
+#### Run with Docker
+
+The Docker is image available publicly [here](https://hub.docker.com/r/deschant/hb-nodejs-microservice)
 
 1. Run `docker pull deschant/deschant/hb-nodejs-microservice`
 2. Start container with: `docker run --name hb-nodejs-microservice -p 3000:3000 -d deschant/hb-nodejs-microservice`
